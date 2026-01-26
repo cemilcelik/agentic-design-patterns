@@ -1,6 +1,6 @@
 # Go Agentic Patterns - Makefile
 
-.PHONY: help run-chain tidy
+.PHONY: help run-chain run-routing run-parallelization tidy
 
 help: ## Mevcut komutları listeler
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
