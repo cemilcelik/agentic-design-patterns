@@ -57,6 +57,51 @@ graph TD
     Join --> Output[Birleştirilmiş Rapor]
 ```
 
+### 4. Reflection (Düşünme/İyileştirme)
+Modelin kendi ürettiği çıktıyı eleştirmesini ve hataları düzelterek yeniden üretmesini sağlar (Self-Correction).
+
+```mermaid
+graph TD
+    Start[Girdi] --> Draft[Taslak Oluştur]
+    Draft --> Critique{Eleştir/Kontrol Et}
+    Critique -->|Hatalı/Eksik| Feedback[Geri Bildirim Oluştur]
+    Feedback --> Draft
+    Critique -->|Yeterli| Final[Final Çıktı]
+```
+
+---
+
+### 5. Tool Use (Araç Kullanımı)
+Modelin kendi bilgisi dışındaki verilere erişmesi veya eylem gerçekleştirmesi için harici fonksiyonları çağırmasıdır.
+
+```mermaid
+graph LR
+    User[Sorgu] --> Model{Gemini Model}
+    Model -->|Fonksiyon Çağrısı| Tool[Hava Durumu API]
+    Tool -->|Veri| Model
+    Model -->|Nihai Yanıt| User
+```
+
+---
+
+### 6. Planning (Planlama)
+Model, görevi doğrudan yapmak yerine önce adım adım bir plan hazırlar, sonra bu planı sırasıyla uygular.
+
+```mermaid
+graph TD
+    Goal[Girdi: Hedef/Görev] -->|Plan İsteği| Planner{Planlayıcı Ajan}
+    Planner -->|JSON Plan| Plan[Adım Adım İş Planı]
+    
+    subgraph Execution [Yürütme Döngüsü]
+        Plan -->|Adım 1| Step1[Adım 1'i Yürüt]
+        Step1 -->|Sonuç + Context| Step2[Adım 2'yi Yürüt]
+        Step2 -->|Sonuç + Context| StepN[Adım N'i Yürüt]
+    end
+    
+    StepN -->|Tüm Sonuçlar| Combiner{Sonuç Birleştirici}
+    Combiner --> Output[Final Çıktı: Blog Yazısı]
+```
+
 ---
 
 ## 🚀 Başlarken
