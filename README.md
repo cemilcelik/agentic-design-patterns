@@ -104,6 +104,29 @@ graph TD
 
 ---
 
+### 7. Multi-Agent Collaboration (Çoklu Ajan İşbirliği)
+Farklı uzmanlıklara sahip ajanların bir koordinatör yönetiminde ortak bir amacı gerçekleştirmesidir.
+
+```mermaid
+graph TD
+    User[Görev] --> Coord{Koordinatör}
+    
+    subgraph Flow [Koordinasyon Akışı]
+        Coord -->|1- Konuyu Araştır| Res[Araştırmacı Ajan]
+        Res -->|Ham Veriler| Coord
+        
+        Coord -->|2- Verileri Analiz Et| Analyst[Analist Ajan]
+        Analyst -->|İçgörüler| Coord
+        
+        Coord -->|3- Hepsini Düzenle| Writer[Yazar Ajan]
+        Writer -->|Final Rapor| Coord
+    end
+    
+    Coord --> Final[Nihai Çıktı]
+```
+
+---
+
 ## 🚀 Başlarken
 
 ### Gereksinimler

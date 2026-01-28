@@ -25,9 +25,13 @@ run-tools: ## Tool Use desenini çalıştırır
 	@echo "🚀 Tool Use başlatılıyor..."
 	@ro run 05-tool-use-pattern/main.go
 
-run-planning:
-	@echo "🚀 Planning (Planlayıcı) desenini çalıştırır"
+run-planning: ## Planning Desenini çalıştırır
+	@echo "🚀 Planning (Planlayıcı) başlatılıyor..."
 	@go run 06-planning-pattern/main.go
+
+run-agents: ## Multi-Agent Collaboration Desenini çalıştırır
+	@echo "🚀 Multi-Agent (Ekip Çalışması) başlatılıyor..."
+	@go run 07-multi-agent-collaboration-pattern/main.go
 
 tidy: ## Go modüllerini temizler ve indirir
 	@go mod tidy
