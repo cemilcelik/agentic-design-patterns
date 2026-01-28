@@ -127,6 +127,61 @@ graph TD
 
 ---
 
+### 8. Memory Management (Bellek Yönetimi)
+Müşteri etkileşimlerini, tercihlerini ve geçmiş konuşmaları saklayarak bağlam farkındalığı sağlar. Kişiselleştirilmiş yanıtlar üretmek için geçmiş bilgileri kullanır.
+
+```mermaid
+graph TD
+    Query[Kullanıcı Sorgusu] --> MemCheck{Bellek Kontrolü}
+    MemCheck -->|Geçmiş Var| Context[Bağlam Oluştur]
+    MemCheck -->|Geçmiş Yok| NewContext[Yeni Bağlam]
+    Context --> Memory[(Müşteri Hafızası)]
+    Memory -->|Tercihler| Context
+    Memory -->|Geçmiş Etkileşimler| Context
+    NewContext --> LLM[LLM İşleme]
+    Context --> LLM
+    LLM --> Response[Yanıt]
+    Response --> SaveMemory[Hafızayı Güncelle]
+    SaveMemory --> Memory
+```
+
+---
+
+### 9. Advanced Memory Management (Gelişmiş Bellek Yönetimi)
+Embedding tabanlı benzerlik araması, farklı bellek türleri (kısa/uzun vadeli, episodik, semantik, prosedürel) ve otomatik bellek birleştirme ile gelişmiş hafıza yönetimi sunar.
+
+```mermaid
+graph TD
+    User[Kullanıcı] -->|Sorgu| QueryProcess[Sorgu İşleme & Embedding]
+    
+    subgraph MemoryStore [Hafıza Deposu]
+        ST[(Kısa Vadeli)]
+        LT[(Uzun Vadeli)]
+    end
+    
+    QueryProcess -->|Vektör Arama| Retriever{Alakalı Olanları Getir}
+    Retriever <--> ST & LT
+    
+    Retriever -->|En İlgili Kayıtlar + Profil| Context[Bağlam Oluştur]
+    Context --> LLM{Gemini Model}
+    
+    LLM -->|Yanıt| Response[Yanıt Üretimi]
+    Response -->|Çıktı| User
+    
+    %% Kayıt Akışı
+    QueryProcess -.->|Sorguyu Kaydet| ST
+    Response -.->|Yanıtı Kaydet| LT
+    
+    %% Arka Plan İşlemi
+    subgraph Background [Arka Plan: Konsolidasyon]
+        ST -.->|Periyodik Kontrol| Logic{Benzerlik Analizi}
+        Logic -->|Grupla & Özetle| Merger[Birleştirici Ajan]
+        Merger -->|Kalıcı Bilgi Olarak Sakla| LT
+    end
+```
+
+---
+
 ## 🚀 Başlarken
 
 ### Gereksinimler

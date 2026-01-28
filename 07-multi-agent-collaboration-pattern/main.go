@@ -186,9 +186,9 @@ func main() {
 	}
 
 	// API anahtarını çevre değişkeninden al
-	apiKey := os.Getenv("GEMINI_API_KEY")
+	apiKey := os.Getenv("GOOGLE_API_KEY")
 	if apiKey == "" {
-		log.Fatal("GEMINI_API_KEY çevre değişkeni ayarlanmalı")
+		log.Fatal("GOOGLE_API_KEY çevre değişkeni ayarlanmalı")
 	}
 
 	ctx := context.Background()
