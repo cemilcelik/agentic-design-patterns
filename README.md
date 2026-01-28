@@ -235,3 +235,14 @@ go run 01-prompt-chaining-pattern/main.go
 - **Go** (Golang)
 - **Google Generative AI Go SDK**
 - **Mermaid.js** (Diyagramlar için)
+
+---
+
+## ⚠️ Uyarı ve Bilgilendirme
+
+Bu proje tamamen **eğitim ve öğrenme amaçlı** ("Code Kata") hazırlanmıştır.
+
+- **Üretim Ortamı İçin Değildir:** Kodlar, temel tasarım desenlerini (pattern) göstermek için basitleştirilmiştir. Hata yönetimi, güvenlik kontrolleri ve performans optimizasyonları üretim standartlarında olmayabilir.
+- **Token Kullanımı:** Örnekler, LLM çağrılarını tekrarlayan döngüler veya büyük bağlam pencereleri (Context Window) kullanabilir. Bu durum, API kotanızın hızlı tükenmesine veya beklenmedik maliyetlere yol açabilir.
+- **Hata Payı:** LLM'ler (Gemini dahil) deterministik değildir; yani aynı kodla farklı zamanlarda farklı sonuçlar üretebilirler. Bazen halüsinasyon görebilir veya hatalı kod/yanıt döndürebilirler.
+- **Veri Güvenliği:** API anahtarlarınızı asla `git` geçmişine eklemeyin. `.env` dosyalarını `.gitignore` içinde tuttuğunuzdan emin olun.
