@@ -4,6 +4,16 @@ Bu depo, **Go (Golang)** ve **Google Gemini API** kullanılarak çeşitli **Ajan
 
 Bu kalıplar, Büyük Dil Modelleri (LLM'ler) ile uygulama mantığı arasındaki etkileşimi yapılandırarak daha güvenilir, ölçeklenebilir ve akıllı yapay zeka sistemlerinin nasıl oluşturulacağını keşfeder.
 
+## ⚠️ Uyarı ve Bilgilendirme
+
+Bu proje tamamen **eğitim ve öğrenme amaçlı** ("Code Kata") hazırlanmıştır.
+
+- **Üretim Ortamı İçin Değildir:** Kodlar, temel tasarım desenlerini (pattern) göstermek için basitleştirilmiştir. Hata yönetimi, güvenlik kontrolleri ve performans optimizasyonları üretim standartlarında olmayabilir.
+- **Token Kullanımı:** Örnekler, LLM çağrılarını tekrarlayan döngüler veya büyük bağlam pencereleri (Context Window) kullanabilir. Bu durum, API kotanızın hızlı tükenmesine veya beklenmedik maliyetlere yol açabilir.
+- **Hata Payı:** LLM'ler (Gemini dahil) deterministik değildir; yani aynı kodla farklı zamanlarda farklı sonuçlar üretebilirler. Bazen halüsinasyon görebilir veya hatalı kod/yanıt döndürebilirler.
+- **Veri Güvenliği:** API anahtarlarınızı asla `git` geçmişine eklemeyin. `.env` dosyalarını `.gitignore` içinde tuttuğunuzdan emin olun.
+
+
 ## 📂 Proje İçeriği ve Mimari
 
 Aşağıda, bu projede yer alan tasarım kalıpları ve işleyiş şemaları bulunmaktadır.
@@ -182,6 +192,32 @@ graph TD
 
 ---
 
+### 10. Learning and Adaptation (Öğrenme ve Adaptasyon)
+RAG (Retrieval-Augmented Generation), Memory-Based Learning ve Online Learning tekniklerini birleştirerek sürekli öğrenen ve adapte olan bir AI sistemi. Müşteri etkileşimlerinden öğrenir, bilgi tabanını dinamik olarak günceller ve kişiselleştirilmiş yanıtlar üretir.
+
+```mermaid
+graph TD
+    Query[Müşteri Sorusu] --> Retrieve[Bilgi Tabanı Araması]
+    Retrieve --> KB[(Bilgi Tabanı)]
+    Query --> Memory{Müşteri Geçmişi}
+    Memory --> History[(Etkileşim Hafızası)]
+    KB --> Context[Bağlam Oluştur]
+    History --> Context
+    Context --> LLM[LLM: Yanıt Üret]
+    LLM --> Response[Yanıt]
+    Response --> Feedback{Müşteri Geri Bildirimi}
+    Feedback -->|Memnuniyet Skoru| Store[Etkileşimi Kaydet]
+    Store --> History
+    NewDoc[Yeni Bilgi] --> Update[Bilgi Tabanını Güncelle]
+    Update --> KB
+    style Query fill:#f9f,stroke:#333,stroke-width:2px
+    style Response fill:#9f9,stroke:#333,stroke-width:2px
+    style KB fill:#bbf,stroke:#333,stroke-width:2px
+    style History fill:#fbb,stroke:#333,stroke-width:2px
+```
+
+---
+
 ## 🚀 Başlarken
 
 ### Gereksinimler
@@ -236,13 +272,3 @@ go run 01-prompt-chaining-pattern/main.go
 - **Google Generative AI Go SDK**
 - **Mermaid.js** (Diyagramlar için)
 
----
-
-## ⚠️ Uyarı ve Bilgilendirme
-
-Bu proje tamamen **eğitim ve öğrenme amaçlı** ("Code Kata") hazırlanmıştır.
-
-- **Üretim Ortamı İçin Değildir:** Kodlar, temel tasarım desenlerini (pattern) göstermek için basitleştirilmiştir. Hata yönetimi, güvenlik kontrolleri ve performans optimizasyonları üretim standartlarında olmayabilir.
-- **Token Kullanımı:** Örnekler, LLM çağrılarını tekrarlayan döngüler veya büyük bağlam pencereleri (Context Window) kullanabilir. Bu durum, API kotanızın hızlı tükenmesine veya beklenmedik maliyetlere yol açabilir.
-- **Hata Payı:** LLM'ler (Gemini dahil) deterministik değildir; yani aynı kodla farklı zamanlarda farklı sonuçlar üretebilirler. Bazen halüsinasyon görebilir veya hatalı kod/yanıt döndürebilirler.
-- **Veri Güvenliği:** API anahtarlarınızı asla `git` geçmişine eklemeyin. `.env` dosyalarını `.gitignore` içinde tuttuğunuzdan emin olun.
