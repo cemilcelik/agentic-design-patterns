@@ -218,6 +218,25 @@ graph TD
 
 ---
 
+### 11. Model Context Protocol (MCP) (Model Bağlam Protokolü)
+Yapay zeka modellerini harici veri kaynaklarına (Resources) ve araçlara (Tools) standartlaştırılmış, bağımsız bir protokol üzerinden bağlar. Bu, güvenlik sınırlarını korumanızı ve modüler bir mimari kurmanızı sağlar.
+
+```mermaid
+graph TD
+    User[Görev İstendi] --> Agent{AI Agent}
+    
+    subgraph Protocol [MCP İstemci/Sunucu Protokolü]
+        Agent -->|Kaynak Listesi Talebi| MCPServer[MCP Sunucusu]
+        MCPServer -->|Bağlam/Veri| Agent
+        Agent -->|Araç Çalıştırma Talebi| MCPServer
+        MCPServer -->|Araç Sonucu| Agent
+    end
+    
+    Agent -->|Cevap| User
+```
+
+---
+
 ## 🚀 Başlarken
 
 ### Gereksinimler

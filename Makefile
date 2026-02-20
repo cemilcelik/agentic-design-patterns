@@ -1,6 +1,6 @@
 # Go Agentic Patterns - Makefile
 
-.PHONY: help run-chain run-routing run-parallelization run-reflection run-tools run-planning run-agents run-memory run-memory-advanced run-learning tidy
+.PHONY: help run-chain run-routing run-parallelization run-reflection run-tools run-planning run-agents run-memory run-memory-advanced run-learning run-mcp tidy
 
 help: ## Mevcut komutları listeler
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
@@ -44,6 +44,10 @@ run-memory-advanced: ## Advanced Memory Management Desenini çalıştırır
 run-learning: ## 10-Learning and Adaptation Desenini çalıştırır
 	@echo "🚀 Learning and Adaptation (Öğrenme ve Adaptasyon) başlatılıyor..."
 	@go run 10-learning-and-adaptation/main.go
+
+run-mcp: ## 11-Model Context Protocol (MCP) Desenini çalıştırır
+	@echo "🚀 Model Context Protocol (MCP) başlatılıyor..."
+	@go run 11-model-context-protocol-pattern/main.go
 
 tidy: ## Go modüllerini temizler ve indirir
 	@go mod tidy
